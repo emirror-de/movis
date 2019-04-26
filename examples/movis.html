@@ -1,0 +1,120 @@
+<!doctype html>
+<head>
+<style>
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+:root {
+    font-size: 16px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#example-wrapper {
+    height: 10vh;
+    background: rgba(45, 45, 65, 0.5);
+}
+
+#example-wrapper div {
+    width: 15%;
+    height: inherit;
+    margin: 0px 10px;
+    background: #000000;
+}
+
+#description {
+    margin-left: 6rem;
+    margin-top: 2rem;
+    width: 50rem;
+}
+
+#controls-status {
+    margin-top: 2rem;
+}
+
+span {
+    min-width: 10rem;
+}
+</style>
+    <script src="../js/movis.js"></script>
+</head>
+<body>
+    <div id="example-wrapper" class="flex">
+        <div id="first" class="visible"></div>
+        <div id="second" class="visible"></div>
+    </div>
+    <div id="controls-status" class="flex">
+        <button id="state-change-button">Change state</button>
+        <button id="state-undo-button">Undo last change</button>
+        <span>Value of movis.show:</span><span id="show-state"></span>
+    </div>
+    <div id="description">
+        <h4>State change example</h4>
+        <p>
+        This is a very basic example of MoViS can be used. In this case, there
+        are two rectangles that fade in and out alternatively.<br>
+        The "Change state" button is only changing the state value that is stored in the
+        global movis object. The attached listeners are then called for synchronizing
+        the view component.<br>
+        The "Undo last change" button is using the "undoState" function of the
+        movis object to undo the last change that has been made to the state.
+        </p>
+    </div>
+    <script>
+        // ANIMATION FUNCTIONS
+        function fadeOut() {
+            this.setAttribute('class', 'hidden');
+        };
+        function fadeIn() {
+            this.setAttribute('class', 'visible');
+        };
+
+        // STATE LISTENING FUNCTIONS
+        let first = (state) => {
+            if (!state) {
+                fadeOut.apply(document.querySelector("#first"));
+            } else {
+                fadeIn.apply(document.querySelector("#first"));
+            }
+        };
+        let second = (state) => {
+            if (state) {
+                fadeOut.apply(document.querySelector("#second"));
+            } else {
+                fadeIn.apply(document.querySelector("#second"));
+            }
+        };
+        let stateSpan = (state) => {
+            document.querySelector('#show-state').innerHTML = state;
+        }
+
+        // BUTTON CLICK BEHAVIOR SETUP
+        document.querySelector('#state-change-button').addEventListener('click', function() {
+            movis.show = !movis.show;
+        });
+        document.querySelector('#state-undo-button').addEventListener('click', function() {
+            movis.undoState("show");
+        });
+
+        // MOVIS SETUP
+        movis.addState("show", true);
+        movis.addStateListener("show", first);
+        movis.addStateListener("show", second);
+        movis.addStateListener("show", stateSpan);
+    </script>
+</body>
