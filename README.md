@@ -1,4 +1,4 @@
-# Model View Synchronization (MoViS)
+# Model View Synchronisation (MoViS)
 A centralized state management tool that allows easy syncronization between model and view of your application.
 
 
@@ -7,7 +7,7 @@ Keeping the view in sync with the model is a major task, especially when it come
 
 As with every topic, discussions about the necessity are going on. Is it really necessary to use these frameworks in order to build a solid, complex web application with a simple and clean code base? For me, a good and inspiring discussion was the one on reddit: [Whats so wrong with direct DOM manipulation?](https://www.reddit.com/r/javascript/comments/6btma7/whats_so_wrong_with_direct_dom_manipulation/).
 
-This discussion let me to the creation of this small tool. The goal of this software is to get a synchronization between the model and view that comes along with pure JavaScript code and a clean and simple API that can be used by developers at every stage (so without using JSX or a virtual DOM etc).
+This discussion let me to the creation of this small tool. The goal of this software is to get a synchronisation between the model and view that comes along with pure JavaScript code and a clean and simple API that can be used by developers at every stage (so without using JSX or a virtual DOM etc).
 
 
 ## Technique
