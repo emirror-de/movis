@@ -94,7 +94,7 @@ movis.removeStateListener("showAndFade", showStateString);
 To remove states and everything that has been attached with it to movis use:
 ```javascript
 // the state will be deleted including history and the register of listeners
-movis.removeStateListener("showAndFade", showStateString);
+movis.removeState("showAndFade");
 ```
 
 ## Contributions and discussions
